@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+$primary: #f44336;
+$secondary: #ba000d;
+$light: #ff7961;
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0 !important;
+}
+
+.header {
+    background: linear-gradient(145deg, #ffffff, #e1e1e1);
+    box-shadow: 20px 20px 60px #d5d5d5, -20px -20px 60px #ffffff;
+    padding: 15px;
+}
+
+.header img {
+    width: 60px;
+    height: auto;
+}
+
+.mainBody {
+    padding: 45px 25px;
+}
+
+.heroBanner {
+}
+
+.orderDiv {
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.mat-raised-button {
+    background-color: $primary;
+    color: white;
+}
