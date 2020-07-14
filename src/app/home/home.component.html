@@ -6,10 +6,10 @@
             <p style="padding: 8px;" [fxHide.lt-md]="true">| Cleanliness is next to Godliness |</p>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-            <div style="cursor: pointer;" *ngFor="let menu of menuList" class="menuItem" routerLinkActive="activeMenu"
+            <!-- <div style="cursor: pointer;" *ngFor="let menu of menuList" class="menuItem" routerLinkActive="activeMenu"
                 [routerLinkActiveOptions]="{exact:true}" [routerLink]="[menu.link]">
                 <p>{{menu.title}}</p>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="mainBody" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="40px">
@@ -107,7 +107,7 @@
                     <div>
                         <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
 
-                            <mat-form-field appearance="outline" style="max-width: 150px;">
+                            <mat-form-field appearance="legacy" style="max-width: 150px;">
                                 <mat-label>Choose Size</mat-label>
                                 <mat-select [(ngModel)]="order.size" name="size">
                                     <mat-option *ngFor="let size of sizes" [value]="size.value">
@@ -119,7 +119,7 @@
                             <div fxLayout="row" fxLayoutAlign="center center">
                                 <mat-icon>remove</mat-icon>
                                 <mat-form-field style="max-width: 50px;">
-                                    <input [(ngModel)]="order.quantity" name="quantity"
+                                    <input [(ngModel)]="order.quantity" name="quantity" [disabled]="true" 
                                         style="text-align: center;padding:0 5px" matInput placeholder="Quantity"
                                         type="number" value="1" #quantity>
                                 </mat-form-field>
@@ -131,42 +131,42 @@
 
                         <div>
                             <form>
-                                <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start center">
-                                    <mat-form-field appearance="outline">
+                                <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
+                                    <mat-form-field appearance="legacy">
                                         <mat-label>First Name</mat-label>
-                                        <input matInput [(ngModel)]="order.name" name="name">
+                                        <input matInput [disabled]="true" [(ngModel)]="order.name" name="name">
                                     </mat-form-field>
 
-                                    <mat-form-field appearance="outline">
+                                    <mat-form-field appearance="legacy">
                                         <mat-label>Surname</mat-label>
-                                        <input matInput name="surname" [(ngModel)]="order.surname">
+                                        <input matInput name="surname" [disabled]="true" [(ngModel)]="order.surname">
                                     </mat-form-field>
                                 </div>
 
-                                <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start center">
-                                    <mat-form-field appearance="outline">
+                                <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
+                                    <mat-form-field appearance="legacy">
                                         <mat-label>Phone Number</mat-label>
-                                        <input matInput name="phoneNumber" [(ngModel)]="order.phoneNumber">
+                                        <input matInput name="phoneNumber" [disabled]="true" [(ngModel)]="order.phoneNumber">
                                     </mat-form-field>
 
-                                    <mat-form-field appearance="outline">
+                                    <mat-form-field appearance="legacy">
                                         <mat-label>House Address</mat-label>
-                                        <input matInput name="address" [(ngModel)]="order.address">
+                                        <input matInput name="address" [disabled]="true" [(ngModel)]="order.address">
                                     </mat-form-field>
                                 </div>
 
-                                <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start center">
-                                    <mat-form-field appearance="outline" style="max-width: 205px;">
+                                <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
+                                    <mat-form-field appearance="legacy" style="max-width: 205px;">
                                         <mat-label>Date of Delivery</mat-label>
                                         <input (focus)="picker1.open()" matInput name="dateOfDelivery"
-                                            [(ngModel)]="order.dateOfDelivery" [matDatepicker]="picker1">
+                                            [disabled]="true" [(ngModel)]="order.dateOfDelivery" [matDatepicker]="picker1">
                                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                         <mat-datepicker touchUi #picker1></mat-datepicker>
                                     </mat-form-field>
 
-                                    <mat-form-field appearance="outline">
+                                    <mat-form-field appearance="legacy">
                                         <mat-label>Time</mat-label>
-                                        <input matInput name="time" [(ngModel)]="order.time">
+                                        <input matInput name="time" [disabled]="true" [(ngModel)]="order.time">
                                     </mat-form-field>
 
                                 </div>
