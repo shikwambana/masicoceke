@@ -7,6 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  order = {
+    size: "",
+    quantity: "",
+    name: "",
+    surname: "",
+    address: "",
+    phoneNumber: "",
+    dateOfDelivery: "",
+    time: "",
+    paid: false,
+    dateOfPayment: "",
+    notes: ""
+  }
+  
   menuList = [
     { title: "Home", link: "/"},
     { title: "Order", link: "/order"},

@@ -9,6 +9,7 @@ import { OrderComponent } from './order/order.component';
 import { ContactComponent } from './contact/contact.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatInputModule, MatFormFieldModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatStepperModule, MatSelectModule, MatIconModule } from "@angular/material";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MatInputModule, MatFormFieldModule, MatButtonModule, MatDatepickerModul
     MatNativeDateModule,
     MatStepperModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
