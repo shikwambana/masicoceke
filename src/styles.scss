@@ -47,7 +47,9 @@ p {
 .mat-vertical-content {
     padding-left: 10px !important;
 }
-.heroBanner {
+.heroBanner img{
+    width: 100%;
+    max-width: 380px;
 }
 
 .orderDiv {

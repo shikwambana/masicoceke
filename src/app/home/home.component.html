@@ -15,7 +15,7 @@
     <div class="mainBody" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="40px">
         <div class="heroBanner" fxLayoutAlign="center center" fxLayout="column" fxFlex="47" fxFlex.lt-md="100">
             <h4 class="homeTitles">Always keep your clothes clean with our amazing washing powder</h4>
-            <img style="max-width: 380px;" src="../../assets/masicoceke-logo.png" alt="Masicoceke logo">
+            <img src="../../assets/masicoceke-logo.png" alt="Masicoceke logo">
             <h1>Masicoceke</h1>
             <p [fxHide.lt-md]="true">| Washing Powder |</p>
             <p style="padding: 8px;" [fxHide.lt-md]="true">Cleanliness is next to Godliness</p>
@@ -27,7 +27,7 @@
                 <mat-step [stepControl]="product">
                     <ng-template matStepLabel>Choose Your size</ng-template>
 
-                    <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
+                    <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start center">
 
                         <mat-form-field appearance="outline" style="max-width: 150px;">
                             <mat-label>Choose Size</mat-label>
@@ -104,77 +104,23 @@
                 <mat-step [stepControl]="Confirm">
                     <ng-template matStepLabel>Confirm and Order</ng-template>
 
-                    <div>
+                    <div *ngIf="order.address">
                         <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
-
-                            <mat-form-field appearance="legacy" style="max-width: 150px;">
-                                <mat-label>Choose Size</mat-label>
-                                <mat-select [(ngModel)]="order.size" name="size">
-                                    <mat-option *ngFor="let size of sizes" [value]="size.value">
-                                        {{size.view}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <div fxLayout="row" fxLayoutAlign="center center">
-                                <mat-icon>remove</mat-icon>
-                                <mat-form-field style="max-width: 50px;">
-                                    <input [(ngModel)]="order.quantity" name="quantity" [disabled]="true" 
-                                        style="text-align: center;padding:0 5px" matInput placeholder="Quantity"
-                                        type="number" value="1" #quantity>
-                                </mat-form-field>
-                                <mat-icon (click)="quantity.value =+ 1">add</mat-icon>
-                            </div>
-
-
+                            <p style="line-height: 1.4;">Hi {{order.name}}, this is to confirm that you are ordering {{order.size}}kg Masicoceke
+                                washing powder.
+                                it will be delivered on the {{order.dateOfDelivery}} to {{order.address}}. <br>
+                                If this is correct, you can go ahead and click order
+                            </p>
                         </div>
-
-                        <div>
-                            <form>
-                                <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
-                                    <mat-form-field appearance="legacy">
-                                        <mat-label>First Name</mat-label>
-                                        <input matInput [disabled]="true" [(ngModel)]="order.name" name="name">
-                                    </mat-form-field>
-
-                                    <mat-form-field appearance="legacy">
-                                        <mat-label>Surname</mat-label>
-                                        <input matInput name="surname" [disabled]="true" [(ngModel)]="order.surname">
-                                    </mat-form-field>
-                                </div>
-
-                                <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
-                                    <mat-form-field appearance="legacy">
-                                        <mat-label>Phone Number</mat-label>
-                                        <input matInput name="phoneNumber" [disabled]="true" [(ngModel)]="order.phoneNumber">
-                                    </mat-form-field>
-
-                                    <mat-form-field appearance="legacy">
-                                        <mat-label>House Address</mat-label>
-                                        <input matInput name="address" [disabled]="true" [(ngModel)]="order.address">
-                                    </mat-form-field>
-                                </div>
-
-                                <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
-                                    <mat-form-field appearance="legacy" style="max-width: 205px;">
-                                        <mat-label>Date of Delivery</mat-label>
-                                        <input (focus)="picker1.open()" matInput name="dateOfDelivery"
-                                            [disabled]="true" [(ngModel)]="order.dateOfDelivery" [matDatepicker]="picker1">
-                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                        <mat-datepicker touchUi #picker1></mat-datepicker>
-                                    </mat-form-field>
-
-                                    <mat-form-field appearance="legacy">
-                                        <mat-label>Time</mat-label>
-                                        <input matInput name="time" [disabled]="true" [(ngModel)]="order.time">
-                                    </mat-form-field>
-
-                                </div>
-                            </form>
-                        </div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-raised-button (click)="orderAndRegister()">Order</button>
+                    </div>
+                    
+                    <div fxLayout="column" fxLayoutGap="15px" *ngIf="!order.address">
+                        You have not placed an order yet
+                        <button mat-raised-button matStepperPrevious>Back</button>
                     </div>
 
-                    <button mat-raised-button matStepperNext>Order</button>
 
                 </mat-step>
             </mat-vertical-stepper>
