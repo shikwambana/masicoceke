@@ -1,0 +1,12 @@
+<div fxLayout="column" fxFill  fxLayoutGap="20px">
+
+    <p>An SMS with your verification code has just being sent to your phone</p>
+    <mat-form-field appearance="outline">
+        <mat-label>Verification Code</mat-label>
+        <input matInput name="verificationCode"
+            [(ngModel)]="code" placeholder="Enter verification code here">
+    </mat-form-field>
+
+    <button mat-raised-button (click)="verify()">Continue</button>
+
+</div>

@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "@angular/material/prebuilt-themes/pink-bluegrey.css";
 
-$primary: #f44336;
+$primary: black;
+// $primary: #f44336;
 $secondary: #ba000d;
 $light: #ff7961;
 
@@ -12,6 +13,8 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: #073855;
+    color: white;
 }
 
 h1,
@@ -22,11 +25,14 @@ h5,
 h6,
 p {
     margin: 0 !important;
+    font-weight: 200;
 }
 
 .header {
-    background: linear-gradient(145deg, #ffffff, #e1e1e1);
-    box-shadow: 20px 20px 60px #d5d5d5, -20px -20px 60px #ffffff;
+    background: linear-gradient(145deg, #1e6c99, #073855);
+    background: #073855;
+box-shadow:  20px 20px 60px #063048, 
+             -20px -20px 60px #084062;
     padding: 15px;
 }
 
@@ -37,6 +43,7 @@ p {
 
 .mainBody {
     padding: 45px 25px;
+    // flex-wrap: wrap-reverse !important;
 }
 
 .homeTitles {
@@ -44,15 +51,21 @@ p {
     text-align: center;
 }
 
+.mat-stepper-horizontal, .mat-stepper-vertical {
+    background-color: transparent;
+}
+
 .mat-vertical-content {
     padding-left: 10px !important;
 }
 .heroBanner img{
     width: 100%;
-    max-width: 380px;
+    // max-width: 380px;
 }
 
-.orderDiv {
+.orderDiv .mat-icon {
+    margin-bottom: 15px;
+    cursor: pointer;
 }
 
 input[type="number"]::-webkit-inner-spin-button {
@@ -61,5 +74,18 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .mat-raised-button {
     background-color: $primary;
-    color: white;
+}
+
+.disableTouch {
+    color: grey;
+    cursor: no-drop !important;
+}
+
+.cancelBtn {
+    border: #686868 1px solid !important;
+    color: rgba(255,255,255,.5);
+}
+
+.body {
+    padding: 20px;
 }

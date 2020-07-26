@@ -1,9 +1,12 @@
 <div fxLayout="column" fxFill>
-    <div class="header" fxLayout="row wrap" fxLayoutAlign="space-between center">
-        <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px" style="cursor: pointer;">
+    <div class="header" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="cursor: pointer;"
+            [routerLink]="['/']">
             <img src="../../assets/masicoceke-logo.png" alt="Masicoceke logo">
-            <h1>Masicoceke</h1>
-            <p style="padding: 8px;" [fxHide.lt-md]="true">| Cleanliness is next to Godliness |</p>
+            <div fxLayout="row wrap">
+                <h1 style="padding-right: 5px;">Masicoceke</h1>
+                <p style="padding-top: 10px;">| Cleanliness is next to Godliness |</p>
+            </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
             <!-- <div style="cursor: pointer;" *ngFor="let menu of menuList" class="menuItem" routerLinkActive="activeMenu"
@@ -27,9 +30,9 @@
                 <mat-step [stepControl]="product">
                     <ng-template matStepLabel>Choose Your size</ng-template>
 
-                    <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start center">
+                    <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start center">
 
-                        <mat-form-field appearance="outline" style="max-width: 150px;">
+                        <mat-form-field appearance="outline" style="max-width: 110px;">
                             <mat-label>Choose Size</mat-label>
                             <mat-select [(ngModel)]="order.size" name="size">
                                 <mat-option *ngFor="let size of sizes" [value]="size.value">
@@ -39,19 +42,26 @@
                         </mat-form-field>
 
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <mat-icon>remove</mat-icon>
-                            <mat-form-field style="max-width: 50px;">
-                                <input [(ngModel)]="order.quantity" name="quantity"
-                                    style="text-align: center;padding:0 5px" matInput placeholder="Quantity"
-                                    type="number" value="1" #quantity>
+
+                            <mat-form-field style="max-width: 90px;" appearance="outline">
+                                <mat-label>How Many?</mat-label>
+                                <input [(ngModel)]="order.quantity" name="quantity" style="text-align: center;" matInput
+                                    placeholder="Quantity" type="number" value="1" inputmode="numeric" #quantity>
                             </mat-form-field>
-                            <mat-icon (click)="quantity.value =+ 1">add</mat-icon>
+                            <div fxLayout="column" fxLayoutAlign="center center">
+                                <mat-icon (click)="increment()">add</mat-icon>
+                                <mat-icon (click)="decrement()" [ngClass]="{'disableTouch': cannotTouch }">remove
+                                </mat-icon>
+                            </div>
+
                         </div>
-
-
                     </div>
 
-                    <button mat-raised-button matStepperNext>Continue</button>
+                    <div fxLayoutGap="15px" fxLayout="row" fxLayoutAlign="space-between center">
+                        <button mat-raised-button matStepperNext>Continue</button>
+                        <button class="cancelBtn" (click)="clearData()" mat-button>Clear Data</button>
+                    </div>
+
                 </mat-step>
                 <mat-step [stepControl]="personalDetails">
                     <ng-template matStepLabel>Your Details</ng-template>
@@ -60,31 +70,32 @@
                         <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start center">
                             <mat-form-field appearance="outline">
                                 <mat-label>First Name</mat-label>
-                                <input matInput [(ngModel)]="order.name" name="name">
+                                <input matInput (focusout)="saveData()" [(ngModel)]="order.name" name="name">
                             </mat-form-field>
 
                             <mat-form-field appearance="outline">
                                 <mat-label>Surname</mat-label>
-                                <input matInput name="surname" [(ngModel)]="order.surname">
+                                <input matInput (focusout)="saveData()" name="surname" [(ngModel)]="order.surname">
                             </mat-form-field>
                         </div>
 
                         <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start center">
                             <mat-form-field appearance="outline">
                                 <mat-label>Phone Number</mat-label>
-                                <input matInput name="phoneNumber" [(ngModel)]="order.phoneNumber">
+                                <input matInput (focusout)="saveData()" name="phoneNumber"
+                                    [(ngModel)]="order.phoneNumber">
                             </mat-form-field>
 
                             <mat-form-field appearance="outline">
                                 <mat-label>House Address</mat-label>
-                                <input matInput name="address" [(ngModel)]="order.address">
+                                <input matInput (focusout)="saveData()" name="address" [(ngModel)]="order.address">
                             </mat-form-field>
                         </div>
 
                         <div fxLayout="row wrap" fxLayoutGap="40px" fxLayoutAlign="start center">
                             <mat-form-field appearance="outline" style="max-width: 205px;">
                                 <mat-label>Date of Delivery</mat-label>
-                                <input (focus)="picker.open()" matInput name="dateOfDelivery"
+                                <input (focus)="picker.open()" matInput (focusout)="saveData()" name="dateOfDelivery"
                                     [(ngModel)]="order.dateOfDelivery" [matDatepicker]="picker">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker touchUi #picker></mat-datepicker>
@@ -92,33 +103,54 @@
 
                             <mat-form-field appearance="outline">
                                 <mat-label>Time</mat-label>
-                                <input matInput name="time" [(ngModel)]="order.time">
+                                <input matInput (focusout)="saveData()" [ngxTimepicker]="timepicker" name="time"
+                                    [(ngModel)]="order.time">
                             </mat-form-field>
+                            <ngx-material-timepicker #timepicker></ngx-material-timepicker>
 
                         </div>
                     </form>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-raised-button matStepperNext>Continue</button>
+
+                    <div fxLayoutGap="15px" fxLayoutAlign="space-between center">
+                        <button mat-raised-button matStepperNext>Continue</button>
+                        <button class="cancelBtn" mat-button matStepperPrevious>Back</button>
+                    </div>
 
                 </mat-step>
                 <mat-step [stepControl]="Confirm">
                     <ng-template matStepLabel>Confirm and Order</ng-template>
 
                     <div *ngIf="order.address">
-                        <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
-                            <p style="line-height: 1.4;">Hi {{order.name}}, this is to confirm that you are ordering {{order.size}}kg Masicoceke
-                                washing powder.
-                                it will be delivered on the {{order.dateOfDelivery}} to {{order.address}}. <br>
-                                If this is correct, you can go ahead and click order
+                        <div fxLayout="column" fxLayoutGap="5px">
+                            <h3>Hi {{order.name}}, Please Confirm your Order:</h3>
+                            <br>
+                            <p style="line-height: 1.8;">Order : {{order.size}}kg Masicoceke washing powder <br>
+                                Date Of Delivery : {{order.dateOfDelivery | date}} <br>
+                                Address : {{order.address}} at {{order.time}} <br>
+                                <br>
                             </p>
+                            <p *ngIf="!loading">If this is correct, you can go ahead and click order</p>
+
                         </div>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-raised-button (click)="orderAndRegister()">Order</button>
+                        <div style="padding: 10px 0;" fxLayoutGap="15px" fxLayoutAlign="space-between center"
+                            [ngStyle.xs]="{'margin-bottom': '100px'}" *ngIf="!loading">
+                            <button mat-raised-button style="width: 120px;" (click)=" registerUser()">Order</button>
+                            <button class="cancelBtn" mat-button matStepperPrevious>Back</button>
+
+                        </div>
+                        <div *ngIf="loading">
+                            <h2>Placing order...</h2>
+                        </div>
+
+                        
+                        <div style="margin: 20px;">
+                            <div id="signin" #signin></div>
+                        </div>
                     </div>
-                    
-                    <div fxLayout="column" fxLayoutGap="15px" *ngIf="!order.address">
-                        You have not placed an order yet
-                        <button mat-raised-button matStepperPrevious>Back</button>
+
+                    <div fxLayout="column" *ngIf="!order.address" [ngStyle.xs]="{'margin-bottom': '100px'}">
+                        <p style="margin: 5px !important;">Please fill in all the Details</p>
+                        <button style="margin: 10px 0 !important;" mat-raised-button matStepperPrevious>Back</button>
                     </div>
 
 
@@ -128,6 +160,5 @@
         </div>
     </div>
     <div>
-
     </div>
 </div>

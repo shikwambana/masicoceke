@@ -8,20 +8,26 @@ import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
 import { ContactComponent } from './contact/contact.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { MatInputModule, MatFormFieldModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatStepperModule, MatSelectModule, MatIconModule } from "@angular/material";
+import { MatInputModule, MatFormFieldModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatStepperModule, MatSelectModule, MatIconModule, MatSnackBarModule, MatPaginatorModule, MatCheckboxModule, MatDialogModule } from "@angular/material";
 import { FormsModule } from '@angular/forms';
-
+import { MatTableModule } from '@angular/material/table'
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     OrderComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -36,12 +42,19 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MatStepperModule,
     MatSelectModule,
     MatIconModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    MatDialogModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NgxMaterialTimepickerModule
   ],
-  providers: [MatDatepickerModule],
-  bootstrap: [AppComponent]
+  providers: [MatDatepickerModule,AngularFireAuth],
+  bootstrap: [AppComponent],
+  entryComponents : [LoginComponent]
 })
 export class AppModule { }

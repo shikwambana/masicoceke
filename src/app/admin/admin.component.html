@@ -1,0 +1,75 @@
+<div fxLayout="column" fxFill>
+    <div class="header" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="cursor: pointer;">
+            <img src="../../assets/masicoceke-logo.png" alt="Masicoceke logo">
+            <div fxLayout="row wrap">
+                <h1 style="padding-right: 5px;">Masicoceke</h1>
+                <p style="padding-top: 10px;">| Cleanliness is next to Godliness |</p>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <!-- <div style="cursor: pointer;" *ngFor="let menu of menuList" class="menuItem" routerLinkActive="activeMenu"
+                [routerLinkActiveOptions]="{exact:true}" [routerLink]="[menu.link]">
+                <p>{{menu.title}}</p>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="body" fxLayout="column" fxLayout.xs="column" fxLayoutGap="10px">
+        <div fxLayoutAlign="center center">
+            <h3 style="padding: 20px">Orders</h3>
+        </div>
+
+        <div fxFlex="100">
+
+            <div fxLayoutAlign="center center">
+                <mat-form-field appearance="outline" style="width: 250px;">
+                    <mat-label>Find An Order</mat-label>
+                    <input matInput placeholder="Filter" (keyup)="applyFilter($event.target.value)">
+                    <mat-icon matSuffix>search</mat-icon>
+                    <!-- <mat-hint>Hint</mat-hint> -->
+                </mat-form-field>
+            </div>
+
+
+            <table style="width: 100%;" mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="size">
+                    <th mat-header-cell *matHeaderCellDef> Product </th>
+                    <td mat-cell *matCellDef="let element"> {{element.size}}kg ({{element.quantity}}) </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dateOfDelivery">
+                    <th mat-header-cell *matHeaderCellDef> Date of Delivery </th>
+                    <td mat-cell *matCellDef="let element"> {{element.dateOfDelivery | date}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="address">
+                    <th mat-header-cell *matHeaderCellDef> Address </th>
+                    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="phoneNumber">
+                    <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+                    <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dateOfPayment">
+                    <th mat-header-cell *matHeaderCellDef> Date of Payment </th>
+                    <td mat-cell *matCellDef="let element"> {{element.dateOfPayment | date}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="paid">
+                    <th mat-header-cell *matHeaderCellDef> Paid? </th>
+                    <td mat-cell *matCellDef="let element"> <mat-checkbox [(ngModel)]="element.paid"></mat-checkbox></td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>

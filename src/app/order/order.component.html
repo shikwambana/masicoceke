@@ -1,1 +1,30 @@
-<p>order works!</p>
+<div fxLayout="column" fxFill>
+    <div class="header" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" style="cursor: pointer;"
+            [routerLink]="['/']">
+            <img src="../../assets/masicoceke-logo.png" alt="Masicoceke logo">
+            <div fxLayout="row wrap">
+                <h1 style="padding-right: 5px;">Masicoceke</h1>
+                <p style="padding-top: 10px;">| Cleanliness is next to Godliness |</p>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <!-- <div style="cursor: pointer;" *ngFor="let menu of menuList" class="menuItem" routerLinkActive="activeMenu"
+                [routerLinkActiveOptions]="{exact:true}" [routerLink]="[menu.link]">
+                <p>{{menu.title}}</p>
+            </div> -->
+        </div>
+    </div>
+    <div style="margin-top: 40px;">
+
+        <div fxLayout="column" fxFill fxLayoutGap="20px" fxLayoutAlign="center center">
+<div>
+    <h3 style="text-align: center;">Your order has being placed and you will be contacted soon</h3>
+
+</div>
+            
+            <button mat-raised-button [routerLink]="['/']">Go Home</button>
+
+        </div>
+    </div>
+</div>
